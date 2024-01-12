@@ -11,7 +11,14 @@ const handler = NextAuth({
         })
     ],
     async session({ session }) {
+        // checking which user is currently online
+        const sessionUser = await User.findOne({
+            email: session.user.email
+        });
 
+        session.user.id = sessionUser._id.toString();
+
+        return session;
     },
     async signIn({ profile }) {
         try {
