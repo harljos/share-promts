@@ -58,6 +58,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
+            {/* if have acces to providers map button for each provider */}
             {providers && 
               Object.values(providers).map((provider) => (
                 <button
@@ -84,6 +85,7 @@ const Nav = () => {
               height={37}
               className='rounded-full'
               alt='profile'
+              // change toggleDropdown to the opposite expression
               onClick={() => settoggleDropdown((prev) => !prev)}
             />
 
@@ -118,6 +120,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
+            {/* if have acces to providers map button for each provider */}
             {providers && 
               Object.values(providers).map((provider) => (
                 <button

@@ -18,6 +18,7 @@ const CreatePrompt = () => {
       setSubmitting(true);
 
       try {
+        // fetch the userId by session, prompt, and tag of form when submitted
         const response = await fetch("api/prompt/new", {
           method: 'POST',
           body: JSON.stringify({
@@ -26,6 +27,11 @@ const CreatePrompt = () => {
             tag: post.tag
           })
         });
+
+        // if response is ok go to home page
+        if (response.ok) {
+            router.push('/');
+        }
       } catch (error) {
         console.log(error);
       } finally {

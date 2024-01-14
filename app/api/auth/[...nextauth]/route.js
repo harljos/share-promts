@@ -4,12 +4,14 @@ import { connectToDB } from "@utils/database";
 import User from "@models/user";
 
 const handler = NextAuth({
+    // providers from google to sign up or sign in
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         })
     ],
+    // callback to update the database
     callbacks: {
         async session({ session }) {
             // checking which user is currently online
