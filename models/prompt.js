@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const PromptSchema = new Schema({
     creator: {
@@ -7,7 +7,7 @@ const PromptSchema = new Schema({
     },
     prompt: {
         type: String,
-        required: [true, 'Promot is required.']
+        required: [true, 'Prompt is required.']
     },
     tag: {
         type: String,

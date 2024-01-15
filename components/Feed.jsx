@@ -30,7 +30,7 @@ const Feed = () => {
   // fetch the posts when the page loads
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("api/prompt");
+      const response = await fetch("/api/prompt");
       const data = await response.json();
 
       setPosts(data);
@@ -53,7 +53,7 @@ const Feed = () => {
       </form>
 
       <PromptCardList 
-        data={[posts]}
+        data={posts}
         handleTagClick={() => {}}
       />
     </section>
