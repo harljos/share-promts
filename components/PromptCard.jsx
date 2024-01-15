@@ -58,7 +58,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         {post.prompt}
       </p>
       <p className="font-inter text-sm blue_gradient cursor-pointer" onClick={() => handleTagClick && handleTagClick(post.tag)}>
-        {post.tag}
+        #{post.tag}
       </p>
 
       {/* checking if the currently logged in user is the creator of the post and if they are on the homepage */}
