@@ -22,9 +22,30 @@ const PromptCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState([]);
+
+  const filterPrompts = (searchText) => {
+    const regex = RegExp(searchText, "i");
+
+    return posts.filter((post) => {
+      regex.test(post.creator.username) ||
+      regex.test(post.tag) ||
+      regex.test(post.prompt)
+    });
+  }
 
   const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
 
+    // debounce
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPrompts(e.target.value);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
   }
 
   // fetch the posts when the page loads
@@ -52,10 +73,19 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList 
-        data={posts}
-        handleTagClick={() => {}}
-      />
+      {searchText ? (
+        <PromptCardList 
+          data={searchedResults}
+          handleTagClick={() => {}}
+        />
+      ) : (
+        <PromptCardList 
+          data={posts}
+          handleTagClick={() => {}}
+        />
+      )}
+
+      
     </section>
   )
 }
