@@ -26,13 +26,10 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
 
   const filterPrompts = (searchText) => {
+    // 'i' flag for case-insensitive search
     const regex = RegExp(searchText, "i");
 
-    return posts.filter((post) => {
-      regex.test(post.creator.username) ||
-      regex.test(post.tag) ||
-      regex.test(post.prompt)
-    });
+    return posts.filter((post) => regex.test(post.creator.username) || regex.test(post.tag) || regex.test(post.prompt));
   }
 
   const handleSearchChange = (e) => {
@@ -46,6 +43,13 @@ const Feed = () => {
         setSearchedResults(searchResult);
       }, 500)
     );
+  }
+
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+
+    const searchResult = filterPrompts(tag);
+    setSearchedResults(searchResult);
   }
 
   // fetch the posts when the page loads
@@ -76,12 +80,12 @@ const Feed = () => {
       {searchText ? (
         <PromptCardList 
           data={searchedResults}
-          handleTagClick={() => {}}
+          handleTagClick={handleTagClick}
         />
       ) : (
         <PromptCardList 
           data={posts}
-          handleTagClick={() => {}}
+          handleTagClick={handleTagClick}
         />
       )}
 
